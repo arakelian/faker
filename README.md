@@ -27,7 +27,7 @@ Add the following to your `pom.xml`:
 <dependency>
     <groupId>com.arakelian</groupId>
     <artifactId>faker</artifactId>
-    <version>1.5.1</version>
+    <version>1.5.2</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -42,7 +42,7 @@ repositories {
 }
 
 dependencies {
-  testCompile 'com.arakelian:faker:1.5.1'
+  testCompile 'com.arakelian:faker:1.5.2'
 }
 ```
 

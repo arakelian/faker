@@ -1,11 +1,5 @@
 // faker
 
-buildscript {
-    repositories {
-      jcenter()
-    }
-}
-
 plugins {
     id 'java'
     id 'maven'
@@ -24,21 +18,39 @@ plugins {
 
     // for deployment to Maven Central
     id "io.codearte.nexus-staging" version "0.11.0"
+
+    // for building fat jar
+    id "com.github.johnrengelman.shadow" version "2.0.2"
+
+    // useful utilities
+    id "com.arakelian.multitool" version "1.2.4"
 }
 
 group   = 'com.arakelian'
 
-// common gradle code shared between projects
-apply from: "gradle/core.gradle"
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.4.1'
+}
+
+multitool {
+    relocates += [
+        'com.google.common'           : 'repackaged.com.arakelian.elastic.${prefix}com.google.common',
+        'com.google.thirdparty'       : 'repackaged.com.arakelian.elastic.${prefix}com.google.thirdparty',
+        'javax.annotation'            : 'repackaged.com.arakelian.elastic.${prefix}javax.annotation',
+    ]
+    proguardOptions += [
+        'keepattributes' : 'Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,*Annotation*,EnclosingMethod'
+    ]
+}
 
 dependencies {
     processor 'org.immutables:value:2.5.6'
 
-    compile 'com.arakelian:more-commons:[1.5,2.0['
-    compile 'com.arakelian:key-value-store:[1.5,2.0['
+    compile 'com.arakelian:more-commons:1.7.0'
+    compile 'com.arakelian:key-value-store:1.7.0'
 
-    // common stuff
-    compile 'com.google.guava:guava:23.4-jre'
+    // shadow Guava due to frequent downstream incompatibility issues
+    shadow  'com.google.guava:guava:23.6-jre'
 
     // logging
     testCompile 'org.apache.logging.log4j:log4j-api:2.9.1'
