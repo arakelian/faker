@@ -47,7 +47,7 @@ public class TextReader<T> {
     }
 
     @Value.Immutable
-    interface Column {
+    public static interface Column {
         public enum Type {
             STRING {
                 @Override
