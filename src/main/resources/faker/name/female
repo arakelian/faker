@@ -1,3 +1,9 @@
+# Frequently Occurring Female First Names from Census 1990
+
+# source: US Census
+# url: https://www.census.gov/topics/population/genealogy/data/1990_census/1990_census_namefiles.html
+# columns: name(string,15), frequency(double,6), cumulativeFrequency(double,6), rank(int)
+
 MARY           2.629  2.629      1
 PATRICIA       1.073  3.702      2
 LINDA          1.035  4.736      3

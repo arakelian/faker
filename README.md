@@ -1,6 +1,62 @@
 # faker
 
-A library for generating fake data such as names, addresses, and phone numbers.
+Faker is library for generating high-quality fake data, such as names, addresses and phone numbers. 
+Faker is still under development, and will evolved in the coming months.
+
+Using Faker is very easy.
+
+
+## Generating People
+
+Let's generate a random person.  
+
+```
+Person person = RandomPerson.get().next()
+```
+
+If we want a list of 20 random people, we would call:
+
+```
+List<Person> people = RandomPerson.get().listOf(20);
+```
+
+If you use Jackson to serialize a person, you'll see something like this:
+
+```
+{
+  "firstName" : "PAM",
+  "lastName" : "GALLINGER",
+  "title" : "Carpet, Floor, and Tile Installer",
+  "gender" : "FEMALE",
+  "birthdate" : "1987-07-13T22:49:34.743000000Z",
+  "age" : 30
+}
+``` 
+
+## Generating Addresses
+
+Let's generate a random address.  
+
+```
+Address address = RandomAddress.get().next()
+```
+
+If we want a list of 20 random addresses, we would call:
+
+```
+List<Address> addresses = RandomAddress.get().listOf(20);
+```
+
+If you use Jackson to serialize an address, you'll see something like this:
+
+```
+{
+  "street" : "60 ENGLISH ST",
+  "city" : "SAN FRANCISCO",
+  "state" : "CA",
+  "postalCode" : "94105"
+}
+``` 
 
 ## Installation
 
@@ -27,7 +83,7 @@ Add the following to your `pom.xml`:
 <dependency>
     <groupId>com.arakelian</groupId>
     <artifactId>faker</artifactId>
-    <version>1.5.2</version>
+    <version>2.0.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -42,7 +98,7 @@ repositories {
 }
 
 dependencies {
-  testCompile 'com.arakelian:faker:1.5.2'
+  testCompile 'com.arakelian:faker:2.0.0'
 }
 ```
 

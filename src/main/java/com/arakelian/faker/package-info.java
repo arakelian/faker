@@ -15,15 +15,9 @@
  * limitations under the License.
  */
 
-package com.arakelian.fake.model;
+@Value.Style(//
+        get = { "is*", "get*" }, //
+        depluralize = true)
+package com.arakelian.faker;
 
-import static org.junit.Assert.assertNotNull;
-
-import org.junit.Test;
-
-public class RandomPersonTest {
-    @Test
-    public void testSimple() {
-        assertNotNull(RandomPerson.nextPerson());
-    }
-}
+import org.immutables.value.Value;

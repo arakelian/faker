@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.arakelian.fake.model;
+package com.arakelian.faker.model;
 
 public enum Gender {
     MALE, FEMALE;

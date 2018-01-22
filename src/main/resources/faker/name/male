@@ -1,3 +1,9 @@
+# Frequently Occurring Male First Names from Census 1990
+
+# source: US Census
+# url: https://www.census.gov/topics/population/genealogy/data/1990_census/1990_census_namefiles.html
+# columns: name(string,15), frequency(double,6), cumulativeFrequency(double,6), rank(int)
+
 JAMES          3.318  3.318      1
 JOHN           3.271  6.589      2
 ROBERT         3.143  9.732      3

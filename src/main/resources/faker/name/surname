@@ -1,3 +1,9 @@
+# Frequently Occurring Surnames from Census 1990
+
+# source: US Census
+# url: https://www.census.gov/topics/population/genealogy/data/1990_census/1990_census_namefiles.html
+# columns: name(string,15), frequency(double,6), cumulativeFrequency(double,6), rank(int)
+
 SMITH          1.006  1.006      1
 JOHNSON        0.810  1.816      2
 WILLIAMS       0.699  2.515      3
