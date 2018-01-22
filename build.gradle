@@ -35,7 +35,7 @@ task wrapper(type: Wrapper) {
 multitool {
     relocates += [
         'org.apache.commons'          : 'repackaged.com.arakelian.faker.${prefix}org.apache.commons',
-        'com.google.common'           : 'repackaged.com.arakelian.faker${prefix}com.google.common',
+        'com.google.common'           : 'repackaged.com.arakelian.faker.${prefix}com.google.common',
         'com.google.thirdparty'       : 'repackaged.com.arakelian.faker.${prefix}com.google.thirdparty',
         'javax.annotation'            : 'repackaged.com.arakelian.faker.${prefix}javax.annotation',
     ]
@@ -50,11 +50,13 @@ dependencies {
     compile 'com.arakelian:more-commons:1.7.2'
     compile 'com.arakelian:key-value-store:1.7.2'
     compile 'com.arakelian:jackson-utils:1.7.4'
-    
+
     // shadow Guava due to frequent downstream incompatibility issues
     shadow  'com.google.guava:guava:23.6-jre'
+
+    // shadow stuff we use very little of, to reduce dependencies
     shadow  'org.apache.commons:commons-lang3:3.7'
-    
+
     // logging
     testCompile 'org.apache.logging.log4j:log4j-api:2.9.1'
     testCompile 'org.apache.logging.log4j:log4j-core:2.9.1'
@@ -65,4 +67,6 @@ dependencies {
 
     // for unit testing
     testCompile 'junit:junit:4.12'
+    testCompile 'com.arakelian:more-commons:1.7.2:tests'
+    testCompile 'com.arakelian:jackson-utils:1.7.4:tests'
 }

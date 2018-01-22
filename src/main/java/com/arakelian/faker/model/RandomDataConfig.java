@@ -28,16 +28,19 @@ import com.arakelian.core.utils.DateUtils;
 @Value.Immutable
 public interface RandomDataConfig {
     @Value.Default
+    @Value.Auxiliary
     public default ZonedDateTime getFromBirthday() {
         return DateUtils.toZonedDateTimeUtc(1950, Month.JANUARY, 1);
     }
 
     @Value.Default
+    @Value.Auxiliary
     public default Random getRandom() {
         return new Random(0);
     }
 
     @Value.Default
+    @Value.Auxiliary
     public default ZonedDateTime getToBirthday() {
         return DateUtils.toZonedDateTimeUtc(2004, Month.DECEMBER, 31);
     }
