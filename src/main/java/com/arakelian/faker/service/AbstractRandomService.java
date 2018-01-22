@@ -38,7 +38,7 @@ public abstract class AbstractRandomService<T> {
             @Override
             public T next() {
                 index++;
-                return next();
+                return AbstractRandomService.this.next();
             }
         };
     }
