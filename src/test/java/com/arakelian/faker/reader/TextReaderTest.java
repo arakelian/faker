@@ -17,9 +17,9 @@
 
 package com.arakelian.faker.reader;
 
-import static com.arakelian.faker.reader.TextReader.Column.Type.DOUBLE;
-import static com.arakelian.faker.reader.TextReader.Column.Type.INT;
-import static com.arakelian.faker.reader.TextReader.Column.Type.STRING;
+import static com.arakelian.faker.reader.TextReader.Type.DOUBLE;
+import static com.arakelian.faker.reader.TextReader.Type.INT;
+import static com.arakelian.faker.reader.TextReader.Type.STRING;
 
 import java.io.IOException;
 

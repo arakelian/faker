@@ -39,8 +39,13 @@ multitool {
         'com.google.thirdparty'       : 'repackaged.com.arakelian.faker.${prefix}com.google.thirdparty',
         'javax.annotation'            : 'repackaged.com.arakelian.faker.${prefix}javax.annotation',
     ]
-    proguardOptions += [
-        'keepattributes' : 'Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,*Annotation*,EnclosingMethod'
+    
+    proguardOptions.keep += [
+        'class com.arakelian.** { *; }',
+    ]
+
+    proguardOptions.keepclassmembers = [
+        'class * extends java.lang.Enum { *; }'
     ]
 }
 
@@ -48,7 +53,7 @@ dependencies {
     processor 'org.immutables:value:2.5.6'
 
     compile 'com.arakelian:more-commons:1.7.2'
-    compile 'com.arakelian:key-value-store:1.7.2'
+    compile 'com.arakelian:key-value-store:1.7.3'
     compile 'com.arakelian:jackson-utils:1.7.4'
 
     // shadow Guava due to frequent downstream incompatibility issues
@@ -67,6 +72,7 @@ dependencies {
 
     // for unit testing
     testCompile 'junit:junit:4.12'
+    testCompile 'net.javacrumbs.json-unit:json-unit:1.25.1'
     testCompile 'com.arakelian:more-commons:1.7.2:tests'
     testCompile 'com.arakelian:jackson-utils:1.7.4:tests'
 }

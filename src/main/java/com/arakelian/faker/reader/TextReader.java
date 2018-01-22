@@ -17,8 +17,6 @@
 
 package com.arakelian.faker.reader;
 
-import static com.arakelian.faker.reader.TextReader.Column.Type.STRING;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -34,7 +32,6 @@ import org.immutables.value.Value;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.arakelian.faker.reader.TextReader.Column.Type;
 import com.arakelian.jackson.utils.JacksonUtils;
 import com.google.common.base.Charsets;
 import com.google.common.base.Preconditions;
@@ -46,36 +43,37 @@ public class TextReader<T> {
         DELIMITED, FIXED_WIDTH;
     }
 
+    public enum Type {
+        STRING {
+            @Override
+            public Object parse(final String value) {
+                return value;
+            }
+        },
+        INT {
+            @Override
+            public Object parse(final String value) {
+                return value.length() != 0 ? Integer.parseInt(value) : null;
+            }
+        },
+        LONG {
+            @Override
+            public Object parse(final String value) {
+                return value.length() != 0 ? Long.parseLong(value) : null;
+            }
+        },
+        DOUBLE {
+            @Override
+            public Object parse(final String value) {
+                return value.length() != 0 ? Double.parseDouble(value) : null;
+            }
+        };
+
+        public abstract Object parse(String value);
+    }
+
     @Value.Immutable
     public static interface Column {
-        public enum Type {
-            STRING {
-                @Override
-                public Object parse(final String value) {
-                    return value;
-                }
-            },
-            INT {
-                @Override
-                public Object parse(final String value) {
-                    return value.length() != 0 ? Integer.parseInt(value) : null;
-                }
-            },
-            LONG {
-                @Override
-                public Object parse(final String value) {
-                    return value.length() != 0 ? Long.parseLong(value) : null;
-                }
-            },
-            DOUBLE {
-                @Override
-                public Object parse(final String value) {
-                    return value.length() != 0 ? Double.parseDouble(value) : null;
-                }
-            };
-
-            public abstract Object parse(String value);
-        }
 
         @Value.Default
         public default int getLength() {
@@ -259,7 +257,7 @@ public class TextReader<T> {
         columns = Maps.newLinkedHashMap();
         final Matcher matcher = COLUMN.matcher(value);
         while (matcher.find()) {
-            final String type = StringUtils.defaultIfEmpty(matcher.group(2), STRING.name());
+            final String type = StringUtils.defaultIfEmpty(matcher.group(2), Type.STRING.name());
             final String length = StringUtils.defaultIfEmpty(matcher.group(3), "0");
             try {
                 final Column column = ImmutableColumn.builder() //
