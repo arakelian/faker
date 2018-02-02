@@ -35,6 +35,10 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
 public class RandomData {
+    public enum Capitalization {
+        LOWER, UPPER, TITLE;
+    }
+
     private static RandomData INSTANCE = new RandomData(ImmutableRandomDataConfig.builder().build());
 
     public static RandomData get() {
@@ -110,9 +114,51 @@ public class RandomData {
         return data;
     }
 
+    public int nextInt(final int min, final int maxInclusive) {
+        return min + random().nextInt(maxInclusive - min + 1);
+    }
+
+    public String nextParagraphs(final String name, final int min, final int max) {
+        final StringBuilder buf = new StringBuilder();
+
+        final int paragraphs = nextInt(min, max);
+        for (int p = 0; p < paragraphs; p++) {
+            if (p != 0) {
+                buf.append('\n');
+            }
+            final int sentences = nextInt(2, 6);
+            for (int s = 0; s < sentences; s++) {
+                if (s != 0) {
+                    buf.append("  ");
+                }
+                buf.append(nextWord(name, Capitalization.TITLE));
+                final int words = nextInt(2, 20);
+                for (int w = 0; w < words; w++) {
+                    buf.append(' ').append(nextWord(name, Capitalization.LOWER));
+                }
+                buf.append(".");
+            }
+        }
+        return buf.toString();
+    }
+
     public String nextString(final String name) {
         final Object[] data = next(name);
         return Objects.toString(data[0], null);
+    }
+
+    public String nextWord(final String name, final Capitalization capitalization) {
+        final String word = nextString(name);
+
+        switch (Preconditions.checkNotNull(capitalization, "capitalization must be non-null")) {
+        case TITLE:
+            return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
+        case UPPER:
+            return word.toUpperCase();
+        case LOWER:
+        default:
+            return word.toLowerCase();
+        }
     }
 
     public Random random() {

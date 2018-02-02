@@ -44,16 +44,12 @@ public class RandomPerson extends AbstractRandomService<Person> {
         final Gender gender = randomData.next(Gender.class);
 
         final String firstName;
-        final String spouseName;
         switch (gender) {
         case FEMALE:
-            // TODO: don't assume gender roles
             firstName = randomData.nextString("name.female");
-            spouseName = randomData.nextString("name.male");
             break;
         case MALE:
             firstName = randomData.nextString("name.male");
-            spouseName = randomData.nextString("name.female");
             break;
         default:
             throw new IllegalStateException("Unknown gender: " + gender);
@@ -65,7 +61,7 @@ public class RandomPerson extends AbstractRandomService<Person> {
                 .gender(gender) //
                 .title(randomData.nextString("job.title")) //
                 .birthdate(randomData.nextDate("birthday")) //
-                .comments(firstName + " is married to " + spouseName) //
+                .comments(randomData.nextParagraphs("words.lorem", 1, 1)) //
                 .build();
         return person;
     }
