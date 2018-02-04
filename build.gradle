@@ -53,8 +53,8 @@ dependencies {
     processor 'org.immutables:value:2.5.6'
 
     compile 'com.arakelian:more-commons:1.7.2'
-    compile 'com.arakelian:key-value-store:1.7.3'
-    compile 'com.arakelian:jackson-utils:1.7.5'
+    compile 'com.arakelian:key-value-store:1.8.0'
+    compile 'com.arakelian:jackson-utils:1.8.0'
 
     // shadow Guava due to frequent downstream incompatibility issues
     shadow  'com.google.guava:guava:23.6-jre'
@@ -74,5 +74,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'net.javacrumbs.json-unit:json-unit:1.25.1'
     testCompile 'com.arakelian:more-commons:1.7.2:tests'
-    testCompile 'com.arakelian:jackson-utils:1.7.5:tests'
+    testCompile 'com.arakelian:jackson-utils:1.8.0:tests'
 }
