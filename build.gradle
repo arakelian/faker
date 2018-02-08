@@ -43,10 +43,6 @@ multitool {
     proguardOptions.keep += [
         'class com.arakelian.** { *; }',
     ]
-
-    proguardOptions.keepclassmembers = [
-        'class * extends java.lang.Enum { *; }'
-    ]
 }
 
 dependencies {
