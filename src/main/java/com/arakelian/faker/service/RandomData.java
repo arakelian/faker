@@ -169,7 +169,7 @@ public class RandomData {
     private <T> TextReader<T> get(final String name, final Class<T> clazz) {
         String resourceName = StringUtils.replace(name, ".", "/");
         if (!StringUtils.startsWith(resourceName, "/")) {
-            resourceName = "/faker/" + resourceName;
+            resourceName = "/com/arakelian/faker/" + resourceName;
         }
 
         final TextReader<?> reader = cache.getUnchecked(resourceName);
