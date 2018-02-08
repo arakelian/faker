@@ -46,7 +46,7 @@ public class TextReaderTest {
 
     @Test
     public void testFemaleNames() throws IOException {
-        final TextReader<CensusData> reader = new TextReader<>("/faker/name/female", CensusData.class);
+        final TextReader<CensusData> reader = new TextReader<>("/com/arakelian/faker/name/female", CensusData.class);
         reader.read();
 
         // verify properties
