@@ -60,7 +60,7 @@ If you use Jackson to serialize an address, you'll see something like this:
 
 ## Installation
 
-The library is available on Maven Central
+The library is available on [Maven Central](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.arakelian%22%20AND%20a%3A%22faker%22).
 
 ### Maven
 
@@ -83,7 +83,7 @@ Add the following to your `pom.xml`:
 <dependency>
     <groupId>com.arakelian</groupId>
     <artifactId>faker</artifactId>
-    <version>2.0.4</version>
+    <version>2.1.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -98,7 +98,7 @@ repositories {
 }
 
 dependencies {
-  testCompile 'com.arakelian:faker:2.0.4'
+  testCompile 'com.arakelian:faker:2.1.0'
 }
 ```
 
