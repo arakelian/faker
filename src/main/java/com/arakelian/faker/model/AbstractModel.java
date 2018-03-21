@@ -24,8 +24,8 @@ import org.immutables.value.Value;
 
 import com.arakelian.core.utils.DateUtils;
 import com.arakelian.core.utils.MoreStringUtils;
-import com.arakelian.dao.feature.HasId;
-import com.arakelian.dao.feature.HasTimestamp;
+import com.arakelian.store.feature.HasId;
+import com.arakelian.store.feature.HasTimestamp;
 
 public abstract class AbstractModel implements HasId, HasTimestamp, Comparable<HasId>, Serializable {
     @Override

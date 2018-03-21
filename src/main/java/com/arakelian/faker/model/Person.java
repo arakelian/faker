@@ -19,6 +19,7 @@ package com.arakelian.faker.model;
 
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Objects;
 
 import org.immutables.value.Value;
 
@@ -34,6 +35,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonPropertyOrder({ "id", "firstName", "lastName", "title", "gender", "birthdate", "age", "comments",
         "created", "updated" })
 public abstract class Person extends AbstractModel {
+    @Nullable
     @Value.Default
     public Integer getAge() {
         final ZonedDateTime dob = getBirthdate();
@@ -42,6 +44,26 @@ public abstract class Person extends AbstractModel {
         }
         final long years = DateUtils.timeBetween(DateUtils.nowWithZoneUtc(), dob, ChronoUnit.YEARS);
         return (int) years;
+    }
+
+    @Override
+    public boolean equals(Object another) {
+        if (this == another)
+            return true;
+        return another instanceof Person && equalTo((Person) another);
+    }
+
+    private boolean equalTo(Person another) {
+        return Objects.equals(getAge(), another.getAge())
+                && Objects.equals(getBirthdate(), another.getBirthdate())
+                && Objects.equals(getComments(), another.getComments())
+                && Objects.equals(getFirstName(), another.getFirstName())
+                && Objects.equals(getGender(), another.getGender())
+                && Objects.equals(getLastName(), another.getLastName())
+                && Objects.equals(getTitle(), another.getTitle())
+                && Objects.equals(getCreated(), another.getCreated())
+                && Objects.equals(getId(), another.getId())
+                && Objects.equals(getUpdated(), another.getUpdated());
     }
 
     @Nullable
