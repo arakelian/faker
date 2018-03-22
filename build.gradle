@@ -23,13 +23,13 @@ plugins {
     id "com.github.johnrengelman.shadow" version "2.0.2"
 
     // useful utilities
-    id "com.arakelian.multitool" version "1.4.0"
+    id "com.arakelian.multitool" version "1.4.2"
 }
 
 group   = 'com.arakelian'
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.4.1'
+    gradleVersion = '4.5.1'
 }
 
 multitool {
@@ -50,9 +50,9 @@ multitool {
 dependencies {
     processor 'org.immutables:value:2.5.6'
 
-    compile 'com.arakelian:more-commons:1.8.1'
-    compile 'com.arakelian:key-value-store:1.9.1'
-    compile 'com.arakelian:jackson-utils:1.9.1'
+    compile 'com.arakelian:more-commons:1.8.2'
+    compile 'com.arakelian:key-value-store:1.9.2'
+    compile 'com.arakelian:jackson-utils:1.9.2'
 
     // shadow Guava due to frequent downstream incompatibility issues
     shadow  'com.google.guava:guava:24.0-jre'
@@ -71,6 +71,6 @@ dependencies {
     // for unit testing
     testCompile 'junit:junit:4.12'
     testCompile 'net.javacrumbs.json-unit:json-unit:1.28.2'
-    testCompile 'com.arakelian:more-commons:1.8.1:tests'
-    testCompile 'com.arakelian:jackson-utils:1.9.1:tests'
+    testCompile 'com.arakelian:more-commons:1.8.2:tests'
+    testCompile 'com.arakelian:jackson-utils:1.9.2:tests'
 }
