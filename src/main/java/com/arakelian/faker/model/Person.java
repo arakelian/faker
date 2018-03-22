@@ -46,6 +46,29 @@ public abstract class Person extends AbstractModel {
         return (int) years;
     }
 
+    /**
+     * Computes a hash code from attributes: {@code age}, {@code birthdate}, {@code comments},
+     * {@code firstName}, {@code gender}, {@code lastName}, {@code title}, {@code created},
+     * {@code id}, {@code updated}.
+     * 
+     * @return hashCode value
+     */
+    @Override
+    public int hashCode() {
+        int h = 5381;
+        h += (h << 5) + Objects.hashCode(getId());
+        h += (h << 5) + Objects.hashCode(getFirstName());
+        h += (h << 5) + Objects.hashCode(getLastName());
+        h += (h << 5) + Objects.hashCode(getGender());
+        h += (h << 5) + Objects.hashCode(getBirthdate());
+        h += (h << 5) + Objects.hashCode(getAge());
+        h += (h << 5) + Objects.hashCode(getTitle());
+        h += (h << 5) + Objects.hashCode(getComments());
+        h += (h << 5) + Objects.hashCode(getCreated());
+        h += (h << 5) + Objects.hashCode(getUpdated());
+        return h;
+    }
+
     @Override
     public boolean equals(Object another) {
         if (this == another)
@@ -54,15 +77,15 @@ public abstract class Person extends AbstractModel {
     }
 
     private boolean equalTo(Person another) {
-        return Objects.equals(getAge(), another.getAge())
-                && Objects.equals(getBirthdate(), another.getBirthdate())
-                && Objects.equals(getComments(), another.getComments())
+        return Objects.equals(getId(), another.getId())
                 && Objects.equals(getFirstName(), another.getFirstName())
-                && Objects.equals(getGender(), another.getGender())
                 && Objects.equals(getLastName(), another.getLastName())
+                && Objects.equals(getGender(), another.getGender())
+                && Objects.equals(getBirthdate(), another.getBirthdate())
+                && Objects.equals(getAge(), another.getAge())
                 && Objects.equals(getTitle(), another.getTitle())
+                && Objects.equals(getComments(), another.getComments())
                 && Objects.equals(getCreated(), another.getCreated())
-                && Objects.equals(getId(), another.getId())
                 && Objects.equals(getUpdated(), another.getUpdated());
     }
 
