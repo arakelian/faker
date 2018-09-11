@@ -83,7 +83,7 @@ Add the following to your `pom.xml`:
 <dependency>
     <groupId>com.arakelian</groupId>
     <artifactId>faker</artifactId>
-    <version>2.2.0</version>
+    <version>2.2.1</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -98,7 +98,7 @@ repositories {
 }
 
 dependencies {
-  testCompile 'com.arakelian:faker:2.2.0'
+  testCompile 'com.arakelian:faker:2.2.1'
 }
 ```
 
