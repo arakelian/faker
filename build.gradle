@@ -8,13 +8,13 @@ plugins {
     id 'idea'
 
     // keep dependencies up-to-date!
-    id 'com.github.ben-manes.versions' version '0.19.0'
+    id 'com.github.ben-manes.versions' version '0.20.0'
 
     // useful for creating immutable java beans
-    id 'org.inferred.processors' version '1.2.15'
+    id 'org.inferred.processors' version '1.2.18'
 
     // to ensure clean code
-    id "net.ltgt.errorprone" version "0.0.14"
+    id "net.ltgt.errorprone" version "0.0.16"
 
     // for deployment to Maven Central
     id "io.codearte.nexus-staging" version "0.11.0"
@@ -29,7 +29,7 @@ plugins {
 group   = 'com.arakelian'
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.8'
+    gradleVersion = '4.10'
 }
 
 multitool {
@@ -48,17 +48,17 @@ multitool {
 }
 
 dependencies {
-    processor 'org.immutables:value:2.6.1'
+    processor 'org.immutables:value:2.7.1'
 
-    compile 'com.arakelian:more-commons:1.9.0'
-    compile 'com.arakelian:key-value-store:1.9.5'
-    compile 'com.arakelian:jackson-utils:1.9.5'
+    compile 'com.arakelian:more-commons:1.9.3'
+    compile 'com.arakelian:key-value-store:1.9.6'
+    compile 'com.arakelian:jackson-utils:1.9.7'
 
     // shadow Guava due to frequent downstream incompatibility issues
-    shadow  'com.google.guava:guava:25.1-jre'
+    shadow  'com.google.guava:guava:26.0-jre'
 
     // shadow stuff we use very little of, to reduce dependencies
-    shadow  'org.apache.commons:commons-lang3:3.7'
+    shadow  'org.apache.commons:commons-lang3:3.8'
 
     // logging
     testCompile 'org.apache.logging.log4j:log4j-api:2.9.1'
@@ -71,6 +71,6 @@ dependencies {
     // for unit testing
     testCompile 'junit:junit:4.12'
     testCompile 'net.javacrumbs.json-unit:json-unit:1.31.1'
-    testCompile 'com.arakelian:more-commons:1.9.0:tests'
-    testCompile 'com.arakelian:jackson-utils:1.9.5:tests'
+    testCompile 'com.arakelian:more-commons:1.9.3:tests'
+    testCompile 'com.arakelian:jackson-utils:1.9.7:tests'
 }
