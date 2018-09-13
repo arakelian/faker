@@ -19,15 +19,18 @@ package com.arakelian.faker.model;
 
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Map;
 import java.util.Objects;
 
 import org.immutables.value.Value;
 
 import com.arakelian.core.feature.Nullable;
 import com.arakelian.core.utils.DateUtils;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.collect.ImmutableMap;
 
 @Value.Immutable
 @JsonSerialize(as = ImmutablePerson.class)
@@ -35,6 +38,14 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonPropertyOrder({ "id", "firstName", "lastName", "title", "gender", "birthdate", "age", "comments",
         "created", "updated" })
 public abstract class Person extends AbstractModel {
+    @Override
+    public boolean equals(final Object another) {
+        if (this == another) {
+            return true;
+        }
+        return another instanceof Person && equalTo((Person) another);
+    }
+
     @Nullable
     @Value.Default
     public Integer getAge() {
@@ -46,11 +57,33 @@ public abstract class Person extends AbstractModel {
         return (int) years;
     }
 
+    @Nullable
+    public abstract ZonedDateTime getBirthdate();
+
+    @Nullable
+    public abstract String getComments();
+
+    public abstract String getFirstName();
+
+    @Nullable
+    public abstract Gender getGender();
+
+    public abstract String getLastName();
+
+    @JsonAnyGetter
+    @Value.Default
+    public Map<String, Object> getProperties() {
+        return ImmutableMap.of();
+    }
+
+    @Nullable
+    public abstract String getTitle();
+
     /**
      * Computes a hash code from attributes: {@code age}, {@code birthdate}, {@code comments},
      * {@code firstName}, {@code gender}, {@code lastName}, {@code title}, {@code created},
      * {@code id}, {@code updated}.
-     * 
+     *
      * @return hashCode value
      */
     @Override
@@ -69,14 +102,7 @@ public abstract class Person extends AbstractModel {
         return h;
     }
 
-    @Override
-    public boolean equals(Object another) {
-        if (this == another)
-            return true;
-        return another instanceof Person && equalTo((Person) another);
-    }
-
-    private boolean equalTo(Person another) {
+    private boolean equalTo(final Person another) {
         return Objects.equals(getId(), another.getId())
                 && Objects.equals(getFirstName(), another.getFirstName())
                 && Objects.equals(getLastName(), another.getLastName())
@@ -88,20 +114,4 @@ public abstract class Person extends AbstractModel {
                 && Objects.equals(getCreated(), another.getCreated())
                 && Objects.equals(getUpdated(), another.getUpdated());
     }
-
-    @Nullable
-    public abstract ZonedDateTime getBirthdate();
-
-    @Nullable
-    public abstract String getComments();
-
-    public abstract String getFirstName();
-
-    @Nullable
-    public abstract Gender getGender();
-
-    public abstract String getLastName();
-
-    @Nullable
-    public abstract String getTitle();
 }

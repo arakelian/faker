@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.arakelian.faker.model;
+package com.arakelian.faker.service;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -24,6 +24,7 @@ import java.io.IOException;
 import org.junit.Test;
 
 import com.arakelian.core.utils.SerializableTestUtils;
+import com.arakelian.faker.model.Person;
 import com.arakelian.faker.service.RandomPerson;
 import com.arakelian.jackson.utils.JacksonTestUtils;
 
