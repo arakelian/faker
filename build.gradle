@@ -54,8 +54,8 @@ dependencies {
     errorprone 'com.google.errorprone:error_prone_core:2.3.1'
 
     compile 'com.arakelian:more-commons:1.9.6'
-    compile 'com.arakelian:key-value-store:1.9.7'
-    compile 'com.arakelian:jackson-utils:1.10.1'
+    compile 'com.arakelian:key-value-store:1.9.8'
+    compile 'com.arakelian:jackson-utils:1.10.3'
 
     // shadow Guava due to frequent downstream incompatibility issues
     shadow  'com.google.guava:guava:26.0-jre'
@@ -75,5 +75,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'net.javacrumbs.json-unit:json-unit:1.31.1'
     testCompile 'com.arakelian:more-commons:1.9.6:tests'
-    testCompile 'com.arakelian:jackson-utils:1.10.1:tests'
+    testCompile 'com.arakelian:jackson-utils:1.10.3:tests'
 }
