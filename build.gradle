@@ -73,7 +73,7 @@ dependencies {
 
     // for unit testing
     testCompile 'junit:junit:4.12'
-    testCompile 'net.javacrumbs.json-unit:json-unit:1.31.1'
+    testCompile 'net.javacrumbs.json-unit:json-unit:2.11.1'
     testCompile 'com.arakelian:more-commons:1.10.0:tests'
     testCompile 'com.arakelian:jackson-utils:1.11.0:tests'
 }
