@@ -17,13 +17,13 @@ plugins {
     id "net.ltgt.errorprone" version "0.0.16"
 
     // for deployment to Maven Central
-    id "io.codearte.nexus-staging" version "0.11.0"
+    id "io.codearte.nexus-staging" version "0.12.0"
 
     // for building fat jar
     id "com.github.johnrengelman.shadow" version "2.0.4"
 
     // useful utilities
-    id "com.arakelian.multitool" version "1.5.3"
+    id "com.arakelian.multitool" version "1.5.7"
 }
 
 group   = 'com.arakelian'
@@ -48,17 +48,17 @@ multitool {
 }
 
 dependencies {
-    processor 'org.immutables:value:2.7.1'
+    processor 'org.immutables:value:2.7.3'
     
     // the gradle plugin uses latest.release which breaks reproducibility
-    errorprone 'com.google.errorprone:error_prone_core:2.3.1'
+    errorprone 'com.google.errorprone:error_prone_core:2.3.2'
 
-    compile 'com.arakelian:more-commons:1.9.6'
-    compile 'com.arakelian:key-value-store:1.9.8'
-    compile 'com.arakelian:jackson-utils:1.10.3'
+    compile 'com.arakelian:more-commons:1.10.0'
+    compile 'com.arakelian:key-value-store:1.10.0'
+    compile 'com.arakelian:jackson-utils:1.11.0'
 
     // shadow Guava due to frequent downstream incompatibility issues
-    shadow  'com.google.guava:guava:26.0-jre'
+    shadow  'com.google.guava:guava:27.0.1-jre'
 
     // shadow stuff we use very little of, to reduce dependencies
     shadow  'org.apache.commons:commons-lang3:3.8.1'
@@ -74,6 +74,6 @@ dependencies {
     // for unit testing
     testCompile 'junit:junit:4.12'
     testCompile 'net.javacrumbs.json-unit:json-unit:1.31.1'
-    testCompile 'com.arakelian:more-commons:1.9.6:tests'
-    testCompile 'com.arakelian:jackson-utils:1.10.3:tests'
+    testCompile 'com.arakelian:more-commons:1.10.0:tests'
+    testCompile 'com.arakelian:jackson-utils:1.11.0:tests'
 }
