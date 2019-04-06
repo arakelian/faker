@@ -6,30 +6,30 @@ plugins {
     id 'signing'
     id 'eclipse'
     id 'idea'
-
+    
     // keep dependencies up-to-date!
-    id 'com.github.ben-manes.versions' version '0.20.0'
+    id 'com.github.ben-manes.versions' version '0.21.0'
 
     // useful for creating immutable java beans
-    id 'org.inferred.processors' version '1.2.18'
+    id 'org.inferred.processors' version '2.2.0'
 
     // to ensure clean code
-    id "net.ltgt.errorprone" version "0.0.16"
+    id "net.ltgt.errorprone" version "0.7.1"
 
     // for deployment to Maven Central
-    id "io.codearte.nexus-staging" version "0.12.0"
+    id "io.codearte.nexus-staging" version "0.20.0"
 
     // for building fat jar
-    id "com.github.johnrengelman.shadow" version "2.0.4"
+    id "com.github.johnrengelman.shadow" version "5.0.0"
 
     // useful utilities
-    id "com.arakelian.multitool" version "1.5.7"
+    id "com.arakelian.multitool" version "2.1.0"
 }
 
 group   = 'com.arakelian'
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.10.2'
+wrapper {
+    gradleVersion = '5.3'
 }
 
 multitool {
@@ -48,17 +48,20 @@ multitool {
 }
 
 dependencies {
-    processor 'org.immutables:value:2.7.3'
+    processor 'org.immutables:value:2.7.5'
     
-    // the gradle plugin uses latest.release which breaks reproducibility
-    errorprone 'com.google.errorprone:error_prone_core:2.3.2'
+    // annotations
+    compile 'org.immutables:value-annotations:2.7.5'
 
-    compile 'com.arakelian:more-commons:1.10.0'
-    compile 'com.arakelian:key-value-store:1.10.0'
-    compile 'com.arakelian:jackson-utils:1.11.0'
+    // configure errorprone version
+    errorprone 'com.google.errorprone:error_prone_core:2.3.3'
+
+    compile 'com.arakelian:more-commons:2.0.0'
+    compile 'com.arakelian:key-value-store:2.0.0'
+    compile 'com.arakelian:jackson-utils:2.0.0'
 
     // shadow Guava due to frequent downstream incompatibility issues
-    shadow  'com.google.guava:guava:27.0.1-jre'
+    shadow  'com.google.guava:guava:27.1-jre'
 
     // shadow stuff we use very little of, to reduce dependencies
     shadow  'org.apache.commons:commons-lang3:3.8.1'
@@ -73,7 +76,7 @@ dependencies {
 
     // for unit testing
     testCompile 'junit:junit:4.12'
-    testCompile 'net.javacrumbs.json-unit:json-unit:2.11.1'
-    testCompile 'com.arakelian:more-commons:1.10.0:tests'
-    testCompile 'com.arakelian:jackson-utils:1.11.0:tests'
+    testCompile 'net.javacrumbs.json-unit:json-unit:2.6.1'
+    testCompile 'com.arakelian:more-commons:2.0.0:tests'
+    testCompile 'com.arakelian:jackson-utils:2.0.0:tests'
 }
