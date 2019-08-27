@@ -8,7 +8,7 @@ plugins {
     id 'idea'
     
     // keep dependencies up-to-date!
-    id 'com.github.ben-manes.versions' version '0.21.0'
+    id 'com.github.ben-manes.versions' version '0.22.0'
 
     // useful for creating immutable java beans
     id 'org.inferred.processors' version '2.2.0'
@@ -17,19 +17,19 @@ plugins {
     id "net.ltgt.errorprone" version "0.7.1"
 
     // for deployment to Maven Central
-    id "io.codearte.nexus-staging" version "0.20.0"
+    id "io.codearte.nexus-staging" version "0.21.0"
 
     // for building fat jar
-    id "com.github.johnrengelman.shadow" version "5.0.0"
+    id "com.github.johnrengelman.shadow" version "5.1.0"
 
     // useful utilities
-    id "com.arakelian.multitool" version "2.3.0"
+    id "com.arakelian.multitool" version "2.4.0"
 }
 
 group   = 'com.arakelian'
 
 wrapper {
-    gradleVersion = '5.3'
+    gradleVersion = '5.6'
 }
 
 multitool {
@@ -54,27 +54,27 @@ dependencies {
     // configure errorprone version
     errorprone 'com.google.errorprone:error_prone_core:2.3.3'
 
-    compile 'com.arakelian:more-commons:2.1.0'
-    compile 'com.arakelian:key-value-store:2.1.0'
-    compile 'com.arakelian:jackson-utils:2.1.0'
+    compile 'com.arakelian:more-commons:2.2.0'
+    compile 'com.arakelian:key-value-store:2.2.0'
+    compile 'com.arakelian:jackson-utils:2.2.0'
 
     // shadow Guava due to frequent downstream incompatibility issues
-    shadow  'com.google.guava:guava:27.1-jre'
+    shadow  'com.google.guava:guava:28.0-jre'
 
     // shadow stuff we use very little of, to reduce dependencies
-    shadow  'org.apache.commons:commons-lang3:3.8.1'
+    shadow  'org.apache.commons:commons-lang3:3.9'
 
     // logging
-    testCompile 'org.apache.logging.log4j:log4j-api:2.9.1'
-    testCompile 'org.apache.logging.log4j:log4j-core:2.9.1'
-    testCompile 'org.apache.logging.log4j:log4j-slf4j-impl:2.9.1'
+    testCompile 'org.apache.logging.log4j:log4j-api:2.12.1'
+    testCompile 'org.apache.logging.log4j:log4j-core:2.12.1'
+    testCompile 'org.apache.logging.log4j:log4j-slf4j-impl:2.12.1'
     testCompile 'org.slf4j:jcl-over-slf4j:1.7.25'
     testCompile 'org.slf4j:jul-to-slf4j:1.7.25'
     compile     'org.slf4j:slf4j-api:1.7.25'
 
     // for unit testing
     testCompile 'junit:junit:4.12'
-    testCompile 'net.javacrumbs.json-unit:json-unit:2.6.1'
-    testCompile 'com.arakelian:more-commons:2.1.0:tests'
-    testCompile 'com.arakelian:jackson-utils:2.1.0:tests'
+    testCompile 'net.javacrumbs.json-unit:json-unit:2.8.0'
+    testCompile 'com.arakelian:more-commons:2.2.0:tests'
+    testCompile 'com.arakelian:jackson-utils:2.2.0:tests'
 }
