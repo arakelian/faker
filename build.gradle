@@ -55,8 +55,8 @@ dependencies {
     errorprone 'com.google.errorprone:error_prone_core:2.3.3'
 
     compile 'com.arakelian:more-commons:2.3.0'
-    compile 'com.arakelian:key-value-store:2.3.0'
-    compile 'com.arakelian:jackson-utils:2.3.0'
+    compile 'com.arakelian:key-value-store:2.4.0'
+    compile 'com.arakelian:jackson-utils:2.4.0'
 
     // shadow Guava due to frequent downstream incompatibility issues
     shadow  'com.google.guava:guava:28.1-jre'
