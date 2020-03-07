@@ -27,6 +27,7 @@ import com.arakelian.core.utils.MoreStringUtils;
 import com.arakelian.store.feature.HasId;
 import com.arakelian.store.feature.HasTimestamp;
 
+@SuppressWarnings("ComparableType")
 public abstract class AbstractModel implements HasId, HasTimestamp, Comparable<HasId>, Serializable {
     @Override
     public int compareTo(final HasId o) {
