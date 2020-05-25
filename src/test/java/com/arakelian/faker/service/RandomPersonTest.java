@@ -25,7 +25,6 @@ import org.junit.Test;
 
 import com.arakelian.core.utils.SerializableTestUtils;
 import com.arakelian.faker.model.Person;
-import com.arakelian.faker.service.RandomPerson;
 import com.arakelian.jackson.utils.JacksonTestUtils;
 
 public class RandomPersonTest {

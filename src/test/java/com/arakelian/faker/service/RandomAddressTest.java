@@ -25,7 +25,6 @@ import org.junit.Test;
 
 import com.arakelian.core.utils.SerializableTestUtils;
 import com.arakelian.faker.model.Address;
-import com.arakelian.faker.service.RandomAddress;
 import com.arakelian.jackson.utils.JacksonTestUtils;
 
 public class RandomAddressTest {
