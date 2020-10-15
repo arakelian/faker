@@ -24,8 +24,8 @@ import static com.arakelian.faker.reader.TextReader.Type.STRING;
 import java.io.IOException;
 
 import org.immutables.value.Value;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -46,38 +46,39 @@ public class TextReaderTest {
 
     @Test
     public void testFemaleNames() throws IOException {
-        final TextReader<CensusData> reader = new TextReader<>("/com/arakelian/faker/name/female", CensusData.class);
+        final TextReader<CensusData> reader = new TextReader<>("/com/arakelian/faker/name/female",
+                CensusData.class);
         reader.read();
 
         // verify properties
-        Assert.assertNotNull(reader.getProperty("source"));
-        Assert.assertNotNull(reader.getProperty("url"));
+        Assertions.assertNotNull(reader.getProperty("source"));
+        Assertions.assertNotNull(reader.getProperty("url"));
 
         // verify column names and ordering
-        Assert.assertEquals(4, reader.getColumnCount());
+        Assertions.assertEquals(4, reader.getColumnCount());
         final String[] columnNames = reader.getColumnNames();
-        Assert.assertEquals("name", columnNames[0]);
-        Assert.assertEquals("frequency", columnNames[1]);
-        Assert.assertEquals("cumulativeFrequency", columnNames[2]);
-        Assert.assertEquals("rank", columnNames[3]);
+        Assertions.assertEquals("name", columnNames[0]);
+        Assertions.assertEquals("frequency", columnNames[1]);
+        Assertions.assertEquals("cumulativeFrequency", columnNames[2]);
+        Assertions.assertEquals("rank", columnNames[3]);
 
         // verify column types
-        Assert.assertEquals(STRING, reader.getColumn("name").getType());
-        Assert.assertEquals(DOUBLE, reader.getColumn("frequency").getType());
-        Assert.assertEquals(DOUBLE, reader.getColumn("cumulativeFrequency").getType());
-        Assert.assertEquals(INT, reader.getColumn("rank").getType());
+        Assertions.assertEquals(STRING, reader.getColumn("name").getType());
+        Assertions.assertEquals(DOUBLE, reader.getColumn("frequency").getType());
+        Assertions.assertEquals(DOUBLE, reader.getColumn("cumulativeFrequency").getType());
+        Assertions.assertEquals(INT, reader.getColumn("rank").getType());
 
         // verify raw data
-        Assert.assertEquals("MARY", reader.getString(0, 0));
-        Assert.assertEquals(Double.valueOf(2.629), reader.getDouble(0, 1));
-        Assert.assertEquals(Double.valueOf(2.629), reader.getDouble(0, 2));
-        Assert.assertEquals(Integer.valueOf(1), reader.getInt(0, 3));
+        Assertions.assertEquals("MARY", reader.getString(0, 0));
+        Assertions.assertEquals(Double.valueOf(2.629), reader.getDouble(0, 1));
+        Assertions.assertEquals(Double.valueOf(2.629), reader.getDouble(0, 2));
+        Assertions.assertEquals(Integer.valueOf(1), reader.getInt(0, 3));
 
         // verify conversion to Java bean
         final CensusData row = reader.getRow(0);
-        Assert.assertEquals("MARY", row.getName());
-        Assert.assertEquals(Double.valueOf(2.629), row.getFrequency());
-        Assert.assertEquals(Double.valueOf(2.629), row.getCumulativeFrequency());
-        Assert.assertEquals(Integer.valueOf(1), row.getRank());
+        Assertions.assertEquals("MARY", row.getName());
+        Assertions.assertEquals(Double.valueOf(2.629), row.getFrequency());
+        Assertions.assertEquals(Double.valueOf(2.629), row.getCumulativeFrequency());
+        Assertions.assertEquals(Integer.valueOf(1), row.getRank());
     }
 }

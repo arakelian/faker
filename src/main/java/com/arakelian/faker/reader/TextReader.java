@@ -39,6 +39,28 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 public class TextReader<T> {
+    @Value.Immutable
+    public static interface Column {
+
+        @Value.Default
+        public default int getLength() {
+            return 0;
+        }
+
+        public String getName();
+
+        @Value.Default
+        public default Type getType() {
+            return Type.STRING;
+        }
+
+        @Value.Check
+        public default void validate() {
+            Preconditions.checkState(!StringUtils.isEmpty(getName()), "name is required");
+            Preconditions.checkState(getLength() >= 0, "length must be >= 0");
+        }
+    }
+
     public enum Format {
         DELIMITED, FIXED_WIDTH;
     }
@@ -70,28 +92,6 @@ public class TextReader<T> {
         };
 
         public abstract Object parse(String value);
-    }
-
-    @Value.Immutable
-    public static interface Column {
-
-        @Value.Default
-        public default int getLength() {
-            return 0;
-        }
-
-        public String getName();
-
-        @Value.Default
-        public default Type getType() {
-            return Type.STRING;
-        }
-
-        @Value.Check
-        public default void validate() {
-            Preconditions.checkState(!StringUtils.isEmpty(getName()), "name is required");
-            Preconditions.checkState(getLength() >= 0, "length must be >= 0");
-        }
     }
 
     private static final String[] EMPTY_COLUMNS = new String[0];
@@ -134,6 +134,14 @@ public class TextReader<T> {
     public TextReader(final URL resource, final Class<T> dataClass) {
         this.resource = Preconditions.checkNotNull(resource);
         this.dataClass = Preconditions.checkNotNull(dataClass);
+    }
+
+    protected T convert(final Object[] data) {
+        if (dataClass.isAssignableFrom(Object[].class)) {
+            return dataClass.cast(data);
+        }
+        final Map<String, Object> map = toMap(data);
+        return JacksonUtils.convertValue(map, dataClass);
     }
 
     public Column getColumn(final int index) {
@@ -230,24 +238,6 @@ public class TextReader<T> {
                 clazz.getName(),
                 row);
         return clazz.cast(value);
-    }
-
-    public void read() throws IOException {
-        LOGGER.debug("Reading {}", resource);
-
-        reset();
-        try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(resource.openConnection().getInputStream(), Charsets.UTF_8))) {
-            lineCount = 0;
-            for (String line = reader.readLine(); line != null; line = reader.readLine()) {
-                lineCount++;
-                parseLine(line);
-            }
-        } catch (final IllegalStateException | IllegalArgumentException | IOException e) {
-            throw new IOException("Unable to load resource: " + resource, e);
-        } finally {
-            LOGGER.debug("Loaded {} rows from {}", getRowCount(), resource);
-        }
     }
 
     private void parseColumns(final String value) throws IOException {
@@ -413,6 +403,24 @@ public class TextReader<T> {
         }
     }
 
+    public void read() throws IOException {
+        LOGGER.debug("Reading {}", resource);
+
+        reset();
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(resource.openConnection().getInputStream(), Charsets.UTF_8))) {
+            lineCount = 0;
+            for (String line = reader.readLine(); line != null; line = reader.readLine()) {
+                lineCount++;
+                parseLine(line);
+            }
+        } catch (final IllegalStateException | IllegalArgumentException | IOException e) {
+            throw new IOException("Unable to load resource: " + resource, e);
+        } finally {
+            LOGGER.debug("Loaded {} rows from {}", getRowCount(), resource);
+        }
+    }
+
     private void reset() {
         properties.clear();
         lineCount = 0;
@@ -423,14 +431,6 @@ public class TextReader<T> {
         haveColumnWidths = false;
         format = null;
         delimiter = null;
-    }
-
-    protected T convert(final Object[] data) {
-        if (dataClass.isAssignableFrom(Object[].class)) {
-            return dataClass.cast(data);
-        }
-        final Map<String, Object> map = toMap(data);
-        return JacksonUtils.convertValue(map, dataClass);
     }
 
     protected Map<String, Object> toMap(final Object[] data) {

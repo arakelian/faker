@@ -46,6 +46,19 @@ public abstract class Person extends AbstractModel {
         return another instanceof Person && equalTo((Person) another);
     }
 
+    private boolean equalTo(final Person another) {
+        return Objects.equals(getId(), another.getId())
+                && Objects.equals(getFirstName(), another.getFirstName())
+                && Objects.equals(getLastName(), another.getLastName())
+                && Objects.equals(getGender(), another.getGender())
+                && Objects.equals(getBirthdate(), another.getBirthdate())
+                && Objects.equals(getAge(), another.getAge())
+                && Objects.equals(getTitle(), another.getTitle())
+                && Objects.equals(getComments(), another.getComments())
+                && Objects.equals(getCreated(), another.getCreated())
+                && Objects.equals(getUpdated(), another.getUpdated());
+    }
+
     @Nullable
     @Value.Default
     public Integer getAge() {
@@ -100,18 +113,5 @@ public abstract class Person extends AbstractModel {
         h += (h << 5) + Objects.hashCode(getCreated());
         h += (h << 5) + Objects.hashCode(getUpdated());
         return h;
-    }
-
-    private boolean equalTo(final Person another) {
-        return Objects.equals(getId(), another.getId())
-                && Objects.equals(getFirstName(), another.getFirstName())
-                && Objects.equals(getLastName(), another.getLastName())
-                && Objects.equals(getGender(), another.getGender())
-                && Objects.equals(getBirthdate(), another.getBirthdate())
-                && Objects.equals(getAge(), another.getAge())
-                && Objects.equals(getTitle(), another.getTitle())
-                && Objects.equals(getComments(), another.getComments())
-                && Objects.equals(getCreated(), another.getCreated())
-                && Objects.equals(getUpdated(), another.getUpdated());
     }
 }

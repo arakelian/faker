@@ -71,6 +71,19 @@ public class RandomData {
         return get(name, Object[].class);
     }
 
+    @SuppressWarnings("unchecked")
+    private <T> TextReader<T> get(final String name, final Class<T> clazz) {
+        String resourceName = StringUtils.replace(name, ".", "/");
+        if (!StringUtils.startsWith(resourceName, "/")) {
+            resourceName = "/com/arakelian/faker/" + resourceName;
+        }
+
+        final TextReader<?> reader = cache.getUnchecked(resourceName);
+        final Class<?> dataClass = reader.getDataClass();
+        Preconditions.checkState(clazz.isAssignableFrom(dataClass));
+        return (TextReader<T>) reader;
+    }
+
     public <T extends Enum> T next(final Class<T> enumClass) {
         final ThreadLocalRandom random = ThreadLocalRandom.current();
         return next(enumClass, random);
@@ -163,18 +176,5 @@ public class RandomData {
 
     public Random random() {
         return ThreadLocalRandom.current();
-    }
-
-    @SuppressWarnings("unchecked")
-    private <T> TextReader<T> get(final String name, final Class<T> clazz) {
-        String resourceName = StringUtils.replace(name, ".", "/");
-        if (!StringUtils.startsWith(resourceName, "/")) {
-            resourceName = "/com/arakelian/faker/" + resourceName;
-        }
-
-        final TextReader<?> reader = cache.getUnchecked(resourceName);
-        final Class<?> dataClass = reader.getDataClass();
-        Preconditions.checkState(clazz.isAssignableFrom(dataClass));
-        return (TextReader<T>) reader;
     }
 }
