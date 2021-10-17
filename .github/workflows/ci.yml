@@ -26,4 +26,4 @@ jobs:
     - name: Gradle wrapper validation
       uses: gradle/wrapper-validation-action@v1
     - name: Run tests
-      run: ./gradlew -Dorg.gradle.internal.launcher.welcomeMessageEnabled=false --no-daemon clean build
+      run: ./gradlew -Dorg.gradle.internal.launcher.welcomeMessageEnabled=false --no-daemon --stacktrace clean build

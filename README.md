@@ -1,4 +1,6 @@
 # faker
+[![version](https://img.shields.io/maven-metadata/v.svg?label=release&metadataUrl=https://repo1.maven.org/maven2/com/arakelian/faker/maven-metadata.xml)](https://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.arakelian%22%20AND%20a%3A%22faker%22)
+[![CI](https://github.com/arakelian/faker/actions/workflows/ci.yml/badge.svg)](https://github.com/arakelian/faker/actions/workflows/ci.yml)
 
 Faker is library for generating high-quality fake data, such as names, addresses and phone numbers. 
 Faker is still under development, and will evolved in the coming months.
