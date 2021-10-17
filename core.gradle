@@ -270,13 +270,15 @@ if(hasProGuard) {
 }
 
 publishing {
-    repositories {
-        maven {
-            name = "ossrh"
-            url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-            credentials {
-                username = project.nexusUsername
-                password = project.nexusPassword
+    if(project.hasProperty('nexusUsername')) {
+        repositories {
+            maven {
+                name = "ossrh"
+                url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+                credentials {
+                    username = project.nexusUsername
+                    password = project.nexusPassword
+                }
             }
         }
     }
