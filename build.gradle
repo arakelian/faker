@@ -1,14 +1,5 @@
 // faker
 
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.guardsquare:proguard-gradle:7.2.1'  // The ProGuard Gradle plugin.
-    }
-}
-
 plugins {
     id 'java-library'
     id 'maven-publish'
@@ -17,29 +8,26 @@ plugins {
     id 'idea'
     
     // keep dependencies up-to-date!
-    id 'com.github.ben-manes.versions' version '0.42.0'
+    id 'com.github.ben-manes.versions' version '0.46.0'
 
     // useful for creating immutable java beans
-    id 'org.inferred.processors' version '3.6.0'
+    id 'org.inferred.processors' version '3.7.0'
 
     // to ensure clean code
-    id "net.ltgt.errorprone" version "2.0.2"
+    id "net.ltgt.errorprone" version "3.1.0"
 
     // for deployment to Maven Central
     id "io.codearte.nexus-staging" version "0.30.0"
-
-    // for building fat jar
-    id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
 group   = 'com.arakelian'
-version = '3.10.0'
+version = '4.0.0'
 
 
 apply from: "core.gradle"
 
 wrapper {
-    gradleVersion = '7.4.2'
+    gradleVersion = '8.1.1'
 }
 
 publishing.publications.mavenJava {
@@ -80,69 +68,34 @@ publishing.publications.mavenJava {
 }
 
 dependencies {
-    processor 'org.immutables:value:2.9.0'
+    processor 'org.immutables:value:2.9.3'
     
     // annotations
-    api 'org.immutables:value-annotations:2.9.0'
+    api 'org.immutables:value-annotations:2.9.3'
     
     // configure errorprone version
-    errorprone 'com.google.errorprone:error_prone_core:2.12.1'
+    errorprone 'com.google.errorprone:error_prone_core:2.18.0'
 
-    api 'com.arakelian:more-commons:3.4.0'
-    api 'com.arakelian:jackson-utils:3.8.0'
+    api 'com.arakelian:more-commons:4.0.0'
+    api 'com.arakelian:jackson-utils:4.0.0'
 
     // shadow Guava due to frequent downstream incompatibility issues
-    shadow      'com.google.guava:guava:31.1-jre'
+    api 'com.google.guava:guava:31.1-jre'
 
     // shadow stuff we use very little of, to reduce dependencies
-    shadow      'org.apache.commons:commons-lang3:3.12.0'
+    api 'org.apache.commons:commons-lang3:3.12.0'
 
     // logging
-    testImplementation 'org.apache.logging.log4j:log4j-api:2.17.2'
-    testImplementation 'org.apache.logging.log4j:log4j-core:2.17.2'
-    testImplementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.17.2'
-    testImplementation 'org.slf4j:jcl-over-slf4j:1.7.32'
-    testImplementation 'org.slf4j:jul-to-slf4j:1.7.32'
-    api                'org.slf4j:slf4j-api:1.7.32'
+    testImplementation 'org.apache.logging.log4j:log4j-api:2.20.0'
+    testImplementation 'org.apache.logging.log4j:log4j-core:2.20.0'
+    testImplementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.20.0'
+    testImplementation 'org.slf4j:jcl-over-slf4j:2.0.7'
+    testImplementation 'org.slf4j:jul-to-slf4j:2.0.7'
+    api                'org.slf4j:slf4j-api:2.0.7'
 
     // for unit testing
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
-    testImplementation 'net.javacrumbs.json-unit:json-unit:2.34.0'
-    testImplementation 'com.arakelian:more-commons:3.4.0:tests'
-    testImplementation 'com.arakelian:jackson-utils:3.8.0:tests'
-}
-
-shadowJar {
-    // need to update any META-INF/services to relocated class names
-    mergeServiceFiles()
-
-    // we don't want poms for third-party stuff
-    exclude 'META-INF/maven/**/*'
-    exclude 'META-INF/**/*.SF'
-    exclude 'META-INF/**/*.DSA'
-    exclude 'META-INF/**/*.RSA'
-
-    // we are only shadowing 'shadow' dependencies
-    configurations = [
-        project.configurations.shadow
-    ]
-
-    relocate 'com.google.common',       'repackaged.com.arakelian.faker.com.google.common'
-    relocate 'com.google.thirdparty',   'repackaged.com.arakelian.faker.com.google.thirdparty'
-    relocate 'javax.annotation',        'repackaged.com.arakelian.faker.javax.annotation'
-    relocate 'org.apache.commons',      'repackaged.com.arakelian.faker.org.apache.commons'
-}
-
-minify {
-    // classes in this jar are minified and copied to output jar
-    injars shadowJar.archivePath
-    
-    // output jar
-    outjars project.ext.minifyJarFile
-    
-    // jars required on classpath at runtime, including Java runtime
-    libraryjars project.ext.libraryJars()
-
-    // classes that we need to keep
-    keep includedescriptorclasses:true, 'class com.arakelian.** { *; }'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+    testImplementation 'net.javacrumbs.json-unit:json-unit:2.37.0'
+    testImplementation 'com.arakelian:more-commons:4.0.0:tests'
+    testImplementation 'com.arakelian:jackson-utils:4.0.0:tests'
 }

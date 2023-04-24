@@ -7,6 +7,10 @@ Faker is still under development, and will evolved in the coming months.
 
 Using Faker is very easy.
 
+## Requirements
+
+* Versions < 4.0.0 require Java 8+
+* Version 4+ require Java 11+
 
 ## Generating People
 
@@ -85,7 +89,7 @@ Add the following to your `pom.xml`:
 <dependency>
     <groupId>com.arakelian</groupId>
     <artifactId>faker</artifactId>
-    <version>3.10.0</version>
+    <version>4.0.0</version>
     <scope>test</scope>
 </dependency>
 ```
@@ -100,7 +104,7 @@ repositories {
 }
 
 dependencies {
-  testCompile 'com.arakelian:faker:3.10.0'
+  testCompile 'com.arakelian:faker:4.0.0'
 }
 ```
 
